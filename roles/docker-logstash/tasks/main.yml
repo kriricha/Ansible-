@@ -1,0 +1,35 @@
+- name: ensure config dirctory present
+  file:
+    path: "/home/richa/ansible/logstashdata/config"
+    state: directory
+    owner: 1000
+    group: 1000
+    mode: 0775
+    force: yes
+
+- name: ensure template file is present
+  template:
+    src: logs.yml
+    dest: /home/richa/ansible/logstashdata/config/logs.yml
+    owner: 1000
+    group: 1000
+    mode: 0775
+    force: yes
+
+
+- name: Pull Logstash Docker image
+  docker_image:
+    name: docker.elastic.co/logstash/logstash:7.17.0
+    source: pull
+
+- name: Run Logstash container
+  docker_container:
+    name: logstash
+    image: docker.elastic.co/logstash/logstash:7.17.0
+    state: started
+    ports:
+      - "5044:5044"
+    volumes:
+      - /home/richa/ansible/logstashdata/config/logs.yml:/usr/share/logstash/config
+      - /path/to/logstash/pipeline:/usr/share/logstash/pipeline
+

@@ -1,0 +1,9 @@
+---
+- name: Deploy kibana using Docker
+  hosts: localhost
+  become: true
+  become_user: richa
+  tasks:
+    - name: Include kibana-logstash role
+      include_role:
+        name: docker-kibana
