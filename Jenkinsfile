@@ -1,6 +1,7 @@
 pipeline {
     agent any
-        
+    
+    stages {
         stage('Give Permission') {
             steps {
                 // Give execution permission to execute_playbooks script
@@ -16,6 +17,14 @@ pipeline {
         }
     }
     
+    post {
+        always {
+            // Print a message indicating successful execution
+            echo 'Pipeline executed successfully.'
+        }
+    }
+}
+
     
     
 
