@@ -10,4 +10,4 @@ ansible-playbook mykibana.yml
 ansible-playbook myfilebeat.yml
 
 # Execute logstash playbook
-ansible-playbook logstash.yml
+ansible-playbook mylogstash.yml
